@@ -4,15 +4,15 @@ import ResponsiveImage from './ResponsiveImage'
 
 function Card({title, body, image}){
   return (
-    <article className="bg-white rounded-lg shadow-sm overflow-hidden">
+    <article className="bg-white rounded-lg shadow-md overflow-hidden">
       {image && (
-        <div className="w-full h-40 lg:h-48">
+        <div className="w-full h-44 lg:h-52">
           <ResponsiveImage src={image} alt={`${title} image`} />
         </div>
       )}
-      <div className="p-6">
-        <h4 className="font-semibold text-lg">{title}</h4>
-        <p className="mt-3 text-neutral-600">{body}</p>
+      <div className="p-6 lg:p-8">
+        <h4 className="font-semibold text-lg lg:text-heading-lg">{title}</h4>
+        <p className="mt-3 text-neutral-600 text-sm lg:text-base">{body}</p>
       </div>
     </article>
   )
