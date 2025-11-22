@@ -6,6 +6,25 @@ Quick start
 - Install dependencies: `npm install`
 - Run dev server: `npm run dev`
 
+Screenshots / visual regression
+- To capture LG/MD/SM screenshots create a running dev server (`npm run dev`) then run:
+
+```bash
+npm i -D playwright
+npm run screenshots
+```
+
+This will save `screenshots/screenshot_lg.png`, `screenshots/screenshot_md.png`, and `screenshots/screenshot_sm.png` for visual checks.
+
+Lighthouse
+- For Lighthouse audits run locally (requires Chrome):
+
+```bash
+npx lighthouse http://localhost:5174 --output html --output-path ./screenshots/lighthouse.html
+```
+
+Note: Running Lighthouse or Playwright inside this container may require additional packages (Chrome) — see the project README for guidance.
+
 Image credits
 - Hero image: "Team working" by Brooke Cagle on Unsplash — https://unsplash.com/photos/1526378720176-4f5f1f2b9d5b
 - Product Design image: Photo by Christina @ wocintechchat on Unsplash — https://unsplash.com/photos/1553877522

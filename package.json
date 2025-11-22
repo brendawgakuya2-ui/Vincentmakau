@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "screenshots": "node scripts/screenshot.cjs",
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write ."
   },
@@ -20,6 +21,7 @@
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.17",
     "vite": "^4.5.14"
   }

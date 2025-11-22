@@ -8,6 +8,22 @@ export default function Navigation(){
   useEffect(() => {
     function onKey(e){
       if(e.key === 'Escape') setOpen(false)
+      if(e.key === 'Tab' && open){
+        // handle focus trap
+        const container = document.getElementById('mobile-menu')
+        if(!container) return
+        const focusable = container.querySelectorAll('a, button, input, [tabindex]:not([tabindex="-1"])')
+        if(focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if(e.shiftKey && document.activeElement === first){
+          e.preventDefault()
+          last.focus()
+        } else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault()
+          first.focus()
+        }
+      }
     }
     if(open){
       document.addEventListener('keydown', onKey)
@@ -43,7 +59,7 @@ export default function Navigation(){
         </button>
 
         {open && (
-          <div id="mobile-menu" className="absolute right-4 top-20 bg-white shadow-lg rounded-md w-64 z-50">
+          <div id="mobile-menu" role="dialog" aria-modal="true" className="absolute right-4 top-20 bg-white shadow-lg rounded-md w-72 z-50">
             <ul className="flex flex-col p-4 gap-3">
               <li><a ref={firstLinkRef} className="focus:outline-none focus:ring-2 focus:ring-primary" href="#features" onClick={() => setOpen(false)}>Features</a></li>
               <li><a className="focus:outline-none focus:ring-2 focus:ring-primary" href="#about" onClick={() => setOpen(false)}>About</a></li>
