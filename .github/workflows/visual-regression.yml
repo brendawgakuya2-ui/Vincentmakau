@@ -1,0 +1,53 @@
+name: Visual regression
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Start preview server
+        run: |
+          npm run preview -- --port 5174 &
+          npx wait-on http://localhost:5174 || sleep 3
+
+      - name: Capture screenshots
+        run: npm run screenshots
+
+      - name: Compare visuals
+        id: compare
+        run: |
+          npm run visual:compare || echo "VISUAL_DIFF=1" >> $GITHUB_ENV
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
+
+      - name: Fail on visual diffs
+        if: env.VISUAL_DIFF == '1'
+        run: |
+          echo "Visual diffs detected. See the uploaded artifacts." 
+          exit 1
