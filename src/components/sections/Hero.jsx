@@ -1,6 +1,6 @@
 import React from 'react'
 import ResponsiveImage from '../common/ResponsiveImage'
-import hero from '../../src/assets/images/hero.jpg'
+import hero from '../../assets/images/hero.jpg'
 
 export default function Hero(){
   return (

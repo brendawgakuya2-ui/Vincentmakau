@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from '../common/Card'
-import product from '../../src/assets/images/product.jpg'
-import systems from '../../src/assets/images/systems.jpg'
-import strategy from '../../src/assets/images/strategy.jpg'
+import product from '../../assets/images/product.jpg'
+import systems from '../../assets/images/systems.jpg'
+import strategy from '../../assets/images/strategy.jpg'
 
 const features = [
   {title: 'Product Design', body: 'User-centred interfaces and flows that increase engagement.', image: product},
