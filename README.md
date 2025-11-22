@@ -82,6 +82,36 @@ Best practices
  - Use the pixel counts and diffs to scope review — large, widespread diffs often indicate a layout regression.
  - Commit baselines only when you or a reviewer verifies visual correctness.
 
+Demo Checklist
+ - [ ] Start the dev server: `npm install` then `npm run dev`.
+ - [ ] Open the site at `http://localhost:5174/` and view at LG (desktop) width (>=1024px).
+ - [ ] Verify header alignment, nav spacing, and logo placement match the target design.
+ - [ ] Inspect the Hero section: heading size, paragraph width, image aspect ratio, and CTA spacing.
+ - [ ] Check the Features grid: card spacing, image crop, and type scale.
+ - [ ] Test keyboard accessibility: Tab through nav, open mobile menu (on small viewport), ensure Skip link focuses main content.
+ - [ ] Run `npm run screenshots` and visually inspect `screenshots/screenshot_lg.png` to confirm pixel parity.
+
+Submission & Final README Notes
+ - Live demo: include the Vercel (or chosen host) URL under **Live Demo** at the top of the README.
+ - Repository: ensure the public GitHub repository is complete with a natural commit history (many small commits reflecting progress).
+ - README must include:
+	 - Project overview and brand identity (name, tagline, value proposition).
+	 - Color system with hex codes and usage rationale (primary, secondary, accent, neutral dark, neutral light).
+	 - Typography choices and type scale across breakpoints.
+	 - Design decisions and any creative departures from the reference.
+	 - Component architecture summary and notable implementation details (lazy loading, memoization, hooks used).
+	 - Performance and accessibility steps taken (image optimization, ARIA, keyboard support, Lighthouse targets).
+	 - Image credits and licenses (Unsplash/Pexels URLs).
+	 - Deployment steps and live demo URL.
+
+ - Final checks before submission:
+	 1. Run `npm run build` and ensure the build succeeds.
+	 2. Run visual tests locally and accept baselines if LG view is final.
+	 3. Run linting: `npm run lint` and format: `npm run format`.
+	 4. Take LG/MD/SM screenshots and add them to `/screenshots` for reference.
+	 5. Push all commits and verify the GitHub Actions visual-regression workflow runs successfully.
+
+
 
 
 Image credits
