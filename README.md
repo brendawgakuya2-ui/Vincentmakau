@@ -38,6 +38,51 @@ I included a `vercel.json` with a basic static-build configuration. After deploy
 Visual regression & CI notes
 - Install `playwright` and run `npm run screenshots` to capture pages. Accept baselines with `npm run visual:accept` then use `npm run test` to compare.
 
+Committing baselines & interpreting diffs
+ - When you are happy with the LG layout and visual appearance, capture screenshots and accept them as baseline images. Baselines live under `screenshots/baseline/`.
+
+ 1. Start the dev server (or build+preview):
+
+```bash
+npm run dev
+# in another terminal:
+npm run screenshots
+```
+
+2. Review the screenshots in `screenshots/` (files: `screenshot_lg.png`, `screenshot_md.png`, `screenshot_sm.png`). If they're correct, accept them as the baseline:
+
+```bash
+npm run visual:accept
+git add screenshots/baseline
+git commit -m "chore(visual): add baseline screenshots"
+git push origin main
+```
+
+3. CI will use these baseline images to compare future changes. If a commit introduces visual differences above the configured pixel threshold, the CI job will fail and upload artifacts.
+
+Interpreting diffs
+ - When the visual regression job fails it uploads three directories under the workflow artifacts: current screenshots, baseline screenshots, and diffs in `screenshots/diff/`.
+ - Open the diff image `diff_<viewport>.png` to see pixel-level changes. The compare script also logs the number of mismatched pixels per viewport.
+ - Typical workflow when diffs are detected:
+	 - Inspect `screenshots/diff/diff_<viewport>.png` to verify the change is intended (content or styling update).
+	 - If the change is intended (design update), regenerate and accept baselines locally and commit them:
+
+```bash
+npm run screenshots
+npm run visual:accept
+git add screenshots/baseline
+git commit -m "chore(visual): update baseline screenshots"
+git push origin main
+```
+
+ - If the diff is unexpected, open the current screenshot to identify the cause (regression in CSS, assets, or layout). Fix the code, then re-run the visual tests locally until the diffs disappear.
+
+Best practices
+ - Keep baseline updates separate and reviewed (small PRs) so baselines only change when UI updates are intentional.
+ - Use the pixel counts and diffs to scope review — large, widespread diffs often indicate a layout regression.
+ - Commit baselines only when you or a reviewer verifies visual correctness.
+
+
 
 Image credits
 - Hero image: "Team working" by Brooke Cagle on Unsplash — https://unsplash.com/photos/1526378720176-4f5f1f2b9d5b
