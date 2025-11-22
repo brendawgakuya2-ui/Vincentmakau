@@ -19,7 +19,9 @@ export default function Hero(){
           <div className="w-full rounded-lg overflow-hidden shadow-lg" style={{aspectRatio: '16/9'}}>
             <ResponsiveImage
               src={hero}
+              webp={hero.replace('.jpg','.webp')}
               alt="Team working on product design"
+              sizes="(min-width:1024px) 600px, 100vw"
             />
           </div>
         </div>

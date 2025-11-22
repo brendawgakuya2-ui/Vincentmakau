@@ -1,26 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function ResponsiveImage({src, alt, className = '', width, height, srcSet}){
+export default function ResponsiveImage({src, webp, alt, className = '', sizes}){
+  // Accepts a local src and optional webp path. Falls back to img when picture isn't supported.
   return (
-    <img
-      src={src}
-      srcSet={srcSet}
-      loading="lazy"
-      alt={alt}
-      width={width}
-      height={height}
-      className={`w-full h-full object-cover ${className}`}
-    />
+    <picture>
+      {webp && <source srcSet={webp} type="image/webp" />}
+      <img src={src} alt={alt} loading="lazy" className={`w-full h-full object-cover ${className}`} sizes={sizes} />
+    </picture>
   )
 }
 
 ResponsiveImage.propTypes = {
   src: PropTypes.string.isRequired,
+  webp: PropTypes.string,
   alt: PropTypes.string.isRequired,
   className: PropTypes.string,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  srcSet: PropTypes.string
+  sizes: PropTypes.string
 }
 
