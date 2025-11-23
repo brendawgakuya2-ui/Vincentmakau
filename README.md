@@ -1,4 +1,4 @@
-# Vincent — Brand Site (Starter)
+# brenda's — Brand Site (Starter)
 
 This repo contains a Vite + React starter with Tailwind CSS configured. I scaffolded the base project and initial components and began populating images and copy to move toward a pixel-accurate LG layout.
 
